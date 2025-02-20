@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quacky 🦆</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Quack 🦆">
+    <meta name="keywords" content="Quack 🦆">
+    <meta name="author" content="Wesley de Groot (https://wesleydegroot.nl)">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 month">
+    <meta name="language" content="English">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="./favicon.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <style>
+        body {
+            background: url('./background.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            user-select: none;
+        }
+
+        img {
+            opacity: 0;
+            display: block;
+            max-height: 85vh;
+            position: absolute;
+            left: 40vw;
+            bottom: 0;
+            user-select: none;
+            animation: opacityAnimation 5s linear 5s forwards;
+        }
+
+        .quack {
+            z-index: 2;
+        }
+
+        .egg {
+            animation: fadeOut 3s linear 1s forwards;
+            z-index: 2;
+        }
+
+        .chick {
+            opacity: 0;
+            animation: fadeOut 3s linear 2.5s forwards;
+            z-index: 2;
+        }
+
+        .duck {
+            opacity: 0;
+            animation: fadeOut 4s linear 4.5s forwards;
+            z-index: 2;
+        }
+
+        .emoji,
+        .emoji-follower {
+            animation: 1s linear infinite move;
+        }
+
+        .curtain {
+            display: flex;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+        }
+
+        .curtain-left,
+        .curtain-right {
+            height: 100vh;
+            width: 50vw;
+            background: rgba(0, 0, 0, 1);
+            position: absolute;
+        }
+
+        .curtain-left {
+            left: 0;
+            background: black;
+            animation: rightToLeft 7s linear forwards;
+        }
+
+        .curtain-right {
+            right: 0;
+            background: black;
+            animation: leftToRight 7s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes move {
+            0% {
+                transform: rotate(-10deg);
+            }
+
+            50% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        @keyframes rightToLeft {
+            0% {
+                left: 0vw;
+            }
+
+            100% {
+                left: -50vw;
+            }
+        }
+
+        @keyframes leftToRight {
+            0% {
+                left: 50vw;
+            }
+
+            100% {
+                left: 100vw;
+            }
+        }
+
+        @keyframes opacityAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .introduction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .quacky-ascii-art {
+            position: absolute;
+            top: 10;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: opacityAnimation 6s linear backwards;
+            animation-direction: reverse;
+            opacity: 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .intro {
+            display: fixed;
+            font-size: 25rem;
+            max-height: 85vh;
+            position: fixed;
+            bottom: -20vw;
+            left: 40vw;
+            line-height: 1px;
+            user-select: none;
+        }
+
+        @media (max-width: 768px) {
+            .quacky-ascii-art {
+                top: 5;
+                font-size: 0.5rem;
+            }
+
+            .intro {
+                left: 20vw;
+            }
+
+            img {
+                max-height: 60vh;
+                left: 0vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="emoji-follower">🦆 Click anywhere!</div>
+    <div class="quacky-ascii-art">
+        <pre>
+ 🦆🦆   🦆   🦆  🦆🦆🦆🦆  🦆🦆🦆  🦆   🦆  🦆   🦆
+🦆  🦆  🦆   🦆  🦆    🦆  🦆      🦆  🦆    🦆 🦆
+🦆  🦆  🦆   🦆  🦆🦆🦆🦆  🦆      🦆🦆       🦆
+ 🦆🦆   🦆   🦆  🦆    🦆  🦆      🦆  🦆     🦆
+   🦆   🦆🦆🦆   🦆    🦆  🦆🦆🦆  🦆   🦆    🦆 (dot) nl
+        </pre>
+    </div>
+    <div class="curtain">
+        <div class="curtain-left"></div>
+        <div class="curtain-right"></div>
+    </div>
+    <div class="introduction">
+        <marquee direction="up" loop="1">
+            <p>Click anywhere to make Josefine, even more 🦆!</p>
+        </marquee>
+    </div>
+    <p class="intro duck">🦆</p>
+    <p class="intro chick">🐥</p>
+    <p class="intro egg">🥚</p>
+    <img src="./Josefine.png" alt="Quack!">
+</body>
+
+<script>
+    const audio = new Audio('./quack.mp3');
+
+    document.addEventListener('click', () => {
+        const x = event.clientX;
+        const y = event.clientY;
+
+        const emoji = document.createElement('div');
+        emoji.innerHTML = '🦆'
+        emoji.style.position = 'absolute';
+        emoji.style.left = x + 'px';
+        emoji.style.top = y + 'px';
+        emoji.style.fontSize = '2rem';
+        emoji.classList.add('emoji');
+        document.body.appendChild(emoji);
+
+        audio.currentTime = 0
+        audio.play();
+    });
+
+    document.addEventListener('mousemove', (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+
+        const emoji = document.querySelector('.emoji-follower');
+        if (emoji) {
+            emoji.innerHTML = '🦆'
+            emoji.style.position = 'absolute';
+            emoji.style.left = x + 'px';
+            emoji.style.top = y + 'px';
+        }
+    });
+
+    for (let i = 0; i < 10; i++) {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        const quack = document.createElement('div');
+        quack.innerHTML = '🦆'
+        quack.style.position = 'absolute';
+        quack.style.left = x + 'px';
+        quack.style.top = y + 'px';
+        quack.style.fontSize = '2rem';
+        quack.classList.add('quack');
+        quack.classList.add('emoji');
+        document.body.appendChild(quack);
+
+        setTimeout(() => {
+            quack.remove();
+        }, (i + 1) * 1000);
+    }
+</script>
+
+</html>
